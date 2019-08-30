@@ -1,17 +1,14 @@
 <template>
   <div>
     <el-form label-position="left" ref="form" label-width="80px">
-      <el-form-item label="用户昵称">
-        <el-input v-model="nickName"></el-input>
+      <el-form-item label="用户名">
+        <el-input v-model="userName"></el-input>
       </el-form-item>
       <el-form-item label="手机号">
-        <el-input v-model="phone"></el-input>
+        <el-input v-model="tel"></el-input>
       </el-form-item>
-      <el-form-item label="出生月">
-        <el-input v-model="birthDay"></el-input>
-      </el-form-item>
-      <el-form-item label="出生日">
-        <el-input v-model="birthMonth"></el-input>
+      <el-form-item label="年龄">
+        <el-input v-model="age"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="addUser">新建用户</el-button>
@@ -23,21 +20,19 @@
 export default {
   data() {
     return {
-      birthMonth: "",
-      birthDay: "",
-      nickName: "",
-      phone: ""
+      userName: "",
+      tel: "",
+      age:""
     };
   },
   methods: {
     addUser() {
       var body = {
-        birthMonth: this.birthMonth,
-        birthDay: this.birthDay,
-        nickName: this.nickName,
-        phone: this.phone
+        userName: this.userName,
+        tel: this.tel,
+        age: this.age
       };
-      this.$http.post("userAdmin", body).then(result => {
+      this.$http.post("user/add", body).then(result => {
         // 注意： 通过 $http 获取到的数据，都在 result.body 中放着
         var result = result.body;
         if (result.errorCode == 0) {
