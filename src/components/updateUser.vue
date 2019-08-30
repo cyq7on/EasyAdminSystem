@@ -1,11 +1,14 @@
 <template>
   <div>
     <el-form label-position="left" ref="form" label-width="80px">
-      <el-form-item label="用户昵称">
-        <el-input v-model="nickName"></el-input>
+      <el-form-item label="用户名">
+        <el-input v-model="userName"></el-input>
       </el-form-item>
       <el-form-item label="手机号">
-        <el-input v-model="phone"></el-input>
+        <el-input v-model="tel"></el-input>
+      </el-form-item>
+      <el-form-item label="年龄">
+        <el-input v-model="age"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="updateUser">立即修改</el-button>
@@ -18,24 +21,27 @@ export default {
   data() {
     return {
       userId: "",
-      nickName: "",
-      phone: ""
+      userName: "",
+      tel: "",
+      age:""
     };
   },
   created() {
     console.log(this.$route.params);
     this.userId = this.$route.params.userId;
-    this.nickName = this.$route.params.nickName;
-    this.phone = this.$route.params.phone;
+    this.userName = this.$route.params.userName;
+    this.tel = this.$route.params.tel;
+    this.age = this.$route.params.age;
   },
   methods: {
     updateUser() {
       var body = {
-        userId: this.userId,
-        nickName: this.nickName,
-        phone: this.phone
+        id: this.userId,
+        userName: this.userName,
+        tel: this.tel,
+        age: this.age
       };
-      this.$http.post("userAdmin/update", body).then(result => {
+      this.$http.post("user/update", body).then(result => {
         // 注意： 通过 $http 获取到的数据，都在 result.body 中放着
         var result = result.body;
         if (result.errorCode == 0) {
