@@ -3,7 +3,13 @@
     <!--搜索框-->
     <el-row style="margin-bottom:10px">
       <el-col :span="4" class="grid">
-        <el-input v-model="input" placeholder="输入手机号" size="mini" clearable:true type="tel" clearable="true"></el-input>
+        <el-input
+          v-model="input"
+          placeholder="输入手机号"
+          size="mini"
+          clearable=true
+          type="tel"
+        ></el-input>
       </el-col>
       <el-col :span="1" class="grid" style="margin-left:10px">
         <el-button type="success" icon="el-icon-search" size="mini" @click.prevent="getUser()">搜索</el-button>
@@ -54,7 +60,7 @@
             type="danger"
             icon="el-icon-delete"
             size="mini"
-            @click.prevent="deleteBlog(scope.$index, scope.row)"
+            @click.prevent="showDeleteDialog(scope.$index, scope.row)"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -73,27 +79,13 @@
       ></el-pagination>
     </div>
 
-    <el-dialog title="vip类型" :visible.sync="vipDialogVisible">
-      <el-select v-model="vipType" placeholder="请选择">
-        <el-option label="月会员" value="2"></el-option>
-        <el-option label="学期会员" value="3"></el-option>
-      </el-select>
-      <el-button type="primary" @click.prevent="updateVip">开通会员</el-button>
-    </el-dialog>
-    <el-dialog title="代金券" :visible.sync="ticketDialogVisible">
-      <el-row>
-        <span v-if="!(ticket.hasBirthdayCoupon || ticket.hasVipCoupon)">没有可用的代金券</span>
-      </el-row>
-      <br />
-      <template>
-        <el-radio :disabled="!ticket.hasBirthdayCoupon" v-model="radio" label="1">生日代金券</el-radio>
-        <el-radio :disabled="!ticket.hasVipCoupon" v-model="radio" label="2">vip代金券</el-radio>
-      </template>
-      <el-button
-        v-if="ticket.hasBirthdayCoupon || ticket.hasVipCoupon"
-        type="primary"
-        @click.prevent="useTicket"
-      >使用代金券</el-button>
+    <el-dialog title="确认删除？" :visible.sync="deleteDialogVisible">
+      <span>用户名：{{userName}}</span>
+      <span>手机号：{{tel}}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="deleteUser">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -111,17 +103,8 @@ export default {
       pageSize: 20,
       total: 0,
       list: [], // 存放列表数据
-      vipDialogVisible: false,
-      ticketDialogVisible: false,
-      vipType: "",
-      ticketType: "",
-      userId: "",
-      radio: "",
-      checked: false,      
-      ticket: {
-        hasBirthdayCoupon: false,
-        hasVipCoupon: false
-      }
+      deleteDialogVisible: false,
+      userId: ""
     };
   },
   methods: {
@@ -151,7 +134,25 @@ export default {
           userName: row.userName,
           tel: row.tel,
           userId: row.id,
-          age:row.age
+          age: row.age
+        }
+      });
+    },
+    showDeleteDialog(index, row) {
+      this.deleteDialogVisible = true;
+      this.userId = row.id;
+    },
+    deleteUser() {
+      this.$http.delete("user/" + this.userId).then(result => {
+        var result = result.body;
+        if (result.errorCode == 0) {
+          // 成功了
+          this.deleteDialogVisible = false;
+          this.getUser();
+          this.$message({
+            message: result.message,
+            type: "success"
+          });
         }
       });
     },
