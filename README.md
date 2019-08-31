@@ -1,6 +1,6 @@
 Here are some screen shot:
 
-![login](https://raw.githubusercontent.com/cyq7on/EasyAdminSystem/master/screenshot/add.png)
+![login](https://raw.githubusercontent.com/cyq7on/EasyAdminSystem/master/screenshot/login.png)
 ![home](https://raw.githubusercontent.com/cyq7on/EasyAdminSystem/master/screenshot/home.png)
 ![add](https://raw.githubusercontent.com/cyq7on/EasyAdminSystem/master/screenshot/add.png)
 ![update](https://raw.githubusercontent.com/cyq7on/EasyAdminSystem/master/screenshot/update.png)
