@@ -4,6 +4,7 @@ import updateUser from './components/updateUser'
 import home from './components/home'
 import login from './components/login'
 import user from './components/user'
+import setting from './components/setting'
 
 
 // 1、创建路由对象
@@ -13,6 +14,7 @@ var router = new VueRouter({
             path: '/home', component: home,
             children: [
                 { path: 'user', component: user ,name:'user' },
+                { path: 'setting', component: setting },
                 { path: 'addUser', component: addUser },
                 { path: 'updateUser', component: updateUser ,name:'updateUser'},
             ]

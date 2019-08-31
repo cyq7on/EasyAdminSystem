@@ -5,10 +5,10 @@
         <el-input v-model="userName"></el-input>
       </el-form-item>
       <el-form-item label="手机号">
-        <el-input v-model="tel"></el-input>
+        <el-input v-model="tel" type="tel"></el-input>
       </el-form-item>
       <el-form-item label="年龄">
-        <el-input v-model="age"></el-input>
+        <el-input v-model="age" type="number"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="updateUser">立即修改</el-button>

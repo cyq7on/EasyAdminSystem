@@ -12,10 +12,8 @@
       <router-link to="/home/user">所有用户</router-link>
       </el-menu-item>
       <el-menu-item index="2">
-      <router-link to="/home/vipUser">VIP用户</router-link>
+      <router-link to="/home/setting">设置</router-link>
       </el-menu-item>
-      <el-menu-item index="3">
-      <router-link to="/home/ticket">代金券使用情况</router-link>
       </el-menu-item>
       <!-- <el-menu-item index="3">
         <a href="https://www.ele.me" target="_blank">关于我们</a>
