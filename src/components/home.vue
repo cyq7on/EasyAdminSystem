@@ -9,7 +9,7 @@
       :default-active="tab"
     >
       <el-menu-item index="1">
-      <router-link to="/home/user">所有用户</router-link>
+      <router-link to="/home/user">用户管理</router-link>
       </el-menu-item>
       <el-menu-item index="2">
       <router-link to="/home/setting">设置</router-link>
