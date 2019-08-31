@@ -134,6 +134,7 @@ export default {
         name: "updateUser",
         params: {
           userName: row.userName,
+          avatar:row.avatar,
           tel: row.tel,
           userId: row.id,
           age: row.age

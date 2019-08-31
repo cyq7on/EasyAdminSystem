@@ -14,7 +14,6 @@
       <el-menu-item index="2">
       <router-link to="/home/setting">设置</router-link>
       </el-menu-item>
-      </el-menu-item>
       <!-- <el-menu-item index="3">
         <a href="https://www.ele.me" target="_blank">关于我们</a>
       </el-menu-item> -->
