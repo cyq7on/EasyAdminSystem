@@ -7,7 +7,7 @@
           v-model="input"
           placeholder="输入手机号"
           size="mini"
-          clearable=true
+          :clearable="true"
           type="tel"
         ></el-input>
       </el-col>
@@ -80,10 +80,11 @@
     </div>
 
     <el-dialog title="确认删除？" :visible.sync="deleteDialogVisible">
-      <span>用户名：{{userName}}</span>
-      <span>手机号：{{tel}}</span>
+      <span>用户名：{{selectRow.userName}}</span>
+      <br/>
+      <span style="display:inline-block;margin-top:10px">手机号：{{selectRow.tel}}</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button @click="deleteDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="deleteUser">确 定</el-button>
       </span>
     </el-dialog>
@@ -104,7 +105,8 @@ export default {
       total: 0,
       list: [], // 存放列表数据
       deleteDialogVisible: false,
-      userId: ""
+      // 被选中的一行
+      selectRow: {}
     };
   },
   methods: {
@@ -140,10 +142,10 @@ export default {
     },
     showDeleteDialog(index, row) {
       this.deleteDialogVisible = true;
-      this.userId = row.id;
+      this.selectRow = row;
     },
     deleteUser() {
-      this.$http.delete("user/" + this.userId).then(result => {
+      this.$http.delete("user/" + this.selectRow.id).then(result => {
         var result = result.body;
         if (result.errorCode == 0) {
           // 成功了

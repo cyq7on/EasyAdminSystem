@@ -13,7 +13,7 @@
       </el-row>
       <el-row>
         <el-col :span="8">
-          <el-input id="password" v-model="password" type="password" placeholder="请输入密码/123456">
+          <el-input id="password" v-model="password" type="password" placeholder="请输入密码/amm123">
             <template slot="prepend">密码</template>
           </el-input>
         </el-col>

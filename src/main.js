@@ -22,7 +22,7 @@ import { message } from "element-ui";
 Vue.prototype.$moment = Moment;//赋值使用
 
 // 如果我们通过全局配置了，请求的数据接口 根域名，则 ，在每次单独发起 http 请求的时候，请求的 url 路径，应该以相对路径开头，前面不能带 /  ，否则 不会启用根路径做拼接；
-Vue.http.options.root = 'http://192.168.1.170:8080/';
+Vue.http.options.root = 'http://127.0.0.1:8080/';
 
 // 全局启用 emulateJSON 选项:如果Web服务器无法处理编码为application/json的请求，你可以启用emulateJSON选项。
 // Vue.http.options.emulateJSON = true;
