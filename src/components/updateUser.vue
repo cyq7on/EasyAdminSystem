@@ -13,8 +13,9 @@
       <el-form-item label="头像">
         <el-upload
           class="avatar-uploader"
-          name="smfile"
-          action="https://sm.ms/api/upload"
+          name="file"
+          action="http://localhost:8080/user/upload"
+          :headers="headers"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
@@ -62,9 +63,12 @@ export default {
     return {
       userId: "",
       userName: "",
-      avatar:"",
+      avatar: "",
       tel: "",
-      age:""
+      age: "",
+      headers: {
+        Authorization: sessionStorage.getItem("STORAGE_TOKEN")
+      }
     };
   },
   created() {
@@ -96,8 +100,15 @@ export default {
         }
       });
     },
-    handleAvatarSuccess(res, file) {
-      this.avatar = URL.createObjectURL(file.raw);
+    handleAvatarSuccess(response, file) {
+      //这里response就是返回的数据
+      console.log(response);
+      if (response.errorCode == 0) {
+        this.avatar = response.data;
+        this.$message.success(response.message);
+      } else {
+        this.$message.error(response.message);
+      }
     },
     beforeAvatarUpload(file) {
       const limit = file.size / 1024 / 1024 < 5;
